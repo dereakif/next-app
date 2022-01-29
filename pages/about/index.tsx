@@ -5,7 +5,10 @@ const AboutPage: NextPage = () => {
   return (
     <>
       <h2>this is About page</h2>
-      <Link href="/">go to home page</Link>
+      <div>
+        <Link href="/">go to home page</Link>
+      </div>
+      <Link href="/about/me">go to about/me page</Link>
     </>
   );
 };
