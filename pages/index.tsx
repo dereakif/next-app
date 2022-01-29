@@ -1,7 +1,9 @@
 import { NextPage } from "next";
 import Link from "next/link";
+import dbConnect from "../lib/mongodb";
 
-const IndexPage: NextPage = () => {
+const IndexPage: NextPage = (props) => {
+  console.log({ props });
   return (
     <>
       <h2>hello world</h2>
@@ -10,3 +12,17 @@ const IndexPage: NextPage = () => {
   );
 };
 export default IndexPage;
+
+export async function getServerSideProps() {
+  try {
+    await dbConnect();
+    return {
+      props: { isConnected: true },
+    };
+  } catch (e) {
+    console.error(e);
+    return {
+      props: { isConnected: false },
+    };
+  }
+}
