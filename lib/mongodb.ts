@@ -1,7 +1,9 @@
 /* This is a database connection function*/
-import mongoose from "mongoose";
-
-const connection = {}; /* creating connection object*/
+import { connect } from "mongoose";
+type ConnectionT = {
+  isConnected?: number;
+};
+const connection: ConnectionT = {}; /* creating connection object*/
 
 async function dbConnect() {
   /* check if we have connection to our database*/
@@ -10,10 +12,7 @@ async function dbConnect() {
   }
 
   /* connecting to our database */
-  const db = await mongoose.connect(process.env.MONGODB_URI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  });
+  const db = await connect(process.env.MONGODB_URI);
   connection.isConnected = db.connections[0].readyState;
 }
 
